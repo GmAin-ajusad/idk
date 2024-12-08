@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    .task {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .task span.category {
+      padding: 5px 10px;
+      border-radius: 3px;
+      color: white;
+      font-weight: bold;
+    }
+    .purple { background-color: #9b59b6; }
+    .blue { background-color: #3498db; }
+    .green { background-color: #2ecc71; }
+    .red { background-color: #e74c3c; }
+    input, select, button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>To-Do List</h1>
+  <div>
+    <input type="text" id="taskInput" placeholder="Enter your task">
+    <select id="categorySelect">
+      <option value="purple">Personal</option>
+      <option value="blue">Work</option>
+      <option value="green">Other</option>
+      <option value="red">Urgent</option>
+    </select>
+    <button onclick="addTask()">Add Task</button>
+  </div>
+  <div id="taskList">
+    <!-- Tasks will appear here -->
+  </div>
+  <script>
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const categorySelect = document.getElementById('categorySelect');
+      const taskList = document.getElementById('taskList');
+
+      const taskDescription = taskInput.value.trim();
+      const category = categorySelect.value;
+
+      if (taskDescription === "") {
+        alert("Please enter a task description.");
+        return;
+      }
+
+      // Create task element
+      const taskElement = document.createElement('div');
+      taskElement.className = 'task';
+
+      const taskText = document.createElement('span');
+      taskText.textContent = taskDescription;
+
+      const categoryLabel = document.createElement('span');
+      categoryLabel.className = `category ${category}`;
+      categoryLabel.textContent = categorySelect.options[categorySelect.selectedIndex].text;
+
+      taskElement.appendChild(taskText);
+      taskElement.appendChild(categoryLabel);
+      taskList.appendChild(taskElement);
+
+      // Clear input
+      taskInput.value = "";
+    }
+  </script>
+</body>
+</html>
